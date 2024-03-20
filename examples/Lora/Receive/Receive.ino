@@ -10,15 +10,15 @@ You can view the output in the serial port.
 #include "utilities.h"
 #include <SPI.h>
 
-#include <GxEPD.h>
+// #include <GxEPD.h>
 //#include <GxGDEP015OC1/GxGDEP015OC1.h>    // 1.54" b/w
 //#include <GxGDEH0154D67/GxGDEH0154D67.h>  // 1.54" b/w
-#include <GxDEPG0150BN/GxDEPG0150BN.h>  // 1.54" b/w
+// #include <GxDEPG0150BN/GxDEPG0150BN.h>  // 1.54" b/w
 
-#include GxEPD_BitmapExamples
-#include <Fonts/FreeMonoBold12pt7b.h>
-#include <GxIO/GxIO_SPI/GxIO_SPI.h>
-#include <GxIO/GxIO.h>
+// #include GxEPD_BitmapExamples
+// #include <Fonts/FreeMonoBold12pt7b.h>
+// #include <GxIO/GxIO_SPI/GxIO_SPI.h>
+// #include <GxIO/GxIO.h>
 
 #include <RadioLib.h>
 
@@ -49,13 +49,13 @@ volatile bool enableInterrupt = true;
 
 
 void setFlag(void);
-void setupDisplay();
-void enableBacklight();
+// void setupDisplay();
+// void enableBacklight();
 void loopReciver();
 bool setupLoRa();
 void configVDD(void);
 void boardInit();
-void LilyGo_logo(void);
+// void LilyGo_logo(void);
 
 void setup()
 {
@@ -63,7 +63,7 @@ void setup()
     delay(200);
     boardInit();
     delay(200);
-    LilyGo_logo();
+    // LilyGo_logo();
 
 }
 
@@ -95,7 +95,7 @@ void loop()
         rgb++;
         rgb %= 3;
     }
-    loopReciver();
+    loopReceiver();
 }
 
 void LilyGo_logo(void)
@@ -110,32 +110,32 @@ void enableBacklight(bool en)
     digitalWrite(ePaper_Backlight, en);
 }
 
-void setupDisplay()
-{
-    dispPort = new SPIClass(
-        /*SPIPORT*/NRF_SPIM2,
-        /*MISO*/ ePaper_Miso,
-        /*SCLK*/ePaper_Sclk,
-        /*MOSI*/ePaper_Mosi);
+// void setupDisplay()
+// {
+//     dispPort = new SPIClass(
+//         /*SPIPORT*/NRF_SPIM2,
+//         /*MISO*/ ePaper_Miso,
+//         /*SCLK*/ePaper_Sclk,
+//         /*MOSI*/ePaper_Mosi);
 
-    io = new GxIO_Class(
-        *dispPort,
-        /*CS*/ ePaper_Cs,
-        /*DC*/ ePaper_Dc,
-        /*RST*/ePaper_Rst);
+//     io = new GxIO_Class(
+//         *dispPort,
+//         /*CS*/ ePaper_Cs,
+//         /*DC*/ ePaper_Dc,
+//         /*RST*/ePaper_Rst);
 
-    display = new GxEPD_Class(
-        *io,
-        /*RST*/ ePaper_Rst,
-        /*BUSY*/ ePaper_Busy);
+//     display = new GxEPD_Class(
+//         *io,
+//         /*RST*/ ePaper_Rst,
+//         /*BUSY*/ ePaper_Busy);
 
-    dispPort->begin();
-    display->init(/*115200*/);
-    display->setRotation(2);
-    display->fillScreen(GxEPD_WHITE);
-    display->setTextColor(GxEPD_BLACK);
-    display->setFont(&FreeMonoBold12pt7b);
-}
+//     dispPort->begin();
+//     display->init(/*115200*/);
+//     display->setRotation(2);
+//     display->fillScreen(GxEPD_WHITE);
+//     display->setTextColor(GxEPD_BLACK);
+//     display->setFont(&FreeMonoBold12pt7b);
+// }
 
 // this function is called when a complete packet
 // is received by the module
@@ -192,7 +192,7 @@ bool setupLoRa()
 
 }
 
-void loopReciver()
+void loopReceiver()
 {
 
     SerialMon.print(F("[SX1262] Waiting for incoming transmission ... "));

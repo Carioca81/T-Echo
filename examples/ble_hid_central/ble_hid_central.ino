@@ -219,7 +219,7 @@ void connect_callback(uint16_t conn_handle)
     BLEConnection *conn = Bluefruit.Connection(conn_handle);
 
     Serial.println("Connected");
-
+    //HID - Human Interface Device
     Serial.print("Discovering HID  Service ... ");
 
     if ( hid.discover(conn_handle) ) {
@@ -352,7 +352,6 @@ void processKeyboardReport(hid_keyboard_report_t *report)
                         offsetX -= GapX;
                     } else {
                         if (offsetY > GapY) {
-                            /
                             offsetY -= GapY;
                             offsetX = GapX * 15;
                         } else {
@@ -413,8 +412,6 @@ void pairing_complete_callback(uint16_t conn_handle, uint8_t auth_status)
         // disconnect
         conn->disconnect();
     }
-
-
 }
 
 bool pairing_passkey_callback(uint16_t conn_handle, uint8_t const passkey[6], bool match_request)
@@ -446,45 +443,45 @@ bool pairing_passkey_callback(uint16_t conn_handle, uint8_t const passkey[6], bo
     return true;
 }
 
-void LilyGo_logo(void)
-{
+// void LilyGo_logo(void)
+// {
 
-    display->fillScreen(GxEPD_WHITE);
-    display->drawExampleBitmap(BitmapExample1, 0, 0, GxEPD_WIDTH, GxEPD_HEIGHT, GxEPD_BLACK);
-    display->update();
-}
+//     display->fillScreen(GxEPD_WHITE);
+//     display->drawExampleBitmap(BitmapExample1, 0, 0, GxEPD_WIDTH, GxEPD_HEIGHT, GxEPD_BLACK);
+//     display->update();
+// }
 
-void enableBacklight(bool en)
-{
-    digitalWrite(ePaper_Backlight, en);
-}
+// void enableBacklight(bool en)
+// {
+//     digitalWrite(ePaper_Backlight, en);
+// }
 
-void setupDisplay()
-{
-    dispPort = new SPIClass(
-        /*SPIPORT*/NRF_SPIM2,
-        /*MISO*/ ePaper_Miso,
-        /*SCLK*/ePaper_Sclk,
-        /*MOSI*/ePaper_Mosi);
+// void setupDisplay()
+// {
+//     dispPort = new SPIClass(
+//         /*SPIPORT*/NRF_SPIM2,
+//         /*MISO*/ ePaper_Miso,
+//         /*SCLK*/ePaper_Sclk,
+//         /*MOSI*/ePaper_Mosi);
 
-    io = new GxIO_Class(
-        *dispPort,
-        /*CS*/ ePaper_Cs,
-        /*DC*/ ePaper_Dc,
-        /*RST*/ePaper_Rst);
+//     io = new GxIO_Class(
+//         *dispPort,
+//         /*CS*/ ePaper_Cs,
+//         /*DC*/ ePaper_Dc,
+//         /*RST*/ePaper_Rst);
 
-    display = new GxEPD_Class(
-        *io,
-        /*RST*/ ePaper_Rst,
-        /*BUSY*/ ePaper_Busy);
+//     display = new GxEPD_Class(
+//         *io,
+//         /*RST*/ ePaper_Rst,
+//         /*BUSY*/ ePaper_Busy);
 
-    dispPort->begin();
-    display->init(/*115200*/);
-    display->setRotation(2);
-    display->fillScreen(GxEPD_WHITE);
-    display->setTextColor(GxEPD_BLACK);
-    display->setFont(&FreeMonoBold12pt7b);
-}
+//     dispPort->begin();
+//     display->init(/*115200*/);
+//     display->setRotation(2);
+//     display->fillScreen(GxEPD_WHITE);
+//     display->setTextColor(GxEPD_BLACK);
+//     display->setFont(&FreeMonoBold12pt7b);
+// }
 
 
 void configVDD(void)
@@ -550,5 +547,5 @@ void boardInit()
     digitalWrite(RedLed_Pin, HIGH);
     digitalWrite(BlueLed_Pin, HIGH);
 
-    setupDisplay();
+    // setupDisplay();
 }

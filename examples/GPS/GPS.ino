@@ -10,24 +10,24 @@ The GPS information is displayed on the serial port.
 #include <SPI.h>
 #include <Wire.h>
 
-#include <GxEPD.h>
+// #include <GxEPD.h>
 //#include <GxGDEP015OC1/GxGDEP015OC1.h>    // 1.54" b/w
 //#include <GxGDEH0154D67/GxGDEH0154D67.h>  // 1.54" b/w
-#include <GxDEPG0150BN/GxDEPG0150BN.h>  // 1.54" b/w
+// #include <GxDEPG0150BN/GxDEPG0150BN.h>  // 1.54" b/w
 
-#include GxEPD_BitmapExamples
-#include <Fonts/FreeMonoBold12pt7b.h>
-#include <GxIO/GxIO_SPI/GxIO_SPI.h>
-#include <GxIO/GxIO.h>
+// #include GxEPD_BitmapExamples
+// #include <Fonts/FreeMonoBold12pt7b.h>
+// #include <GxIO/GxIO_SPI/GxIO_SPI.h>
+// #include <GxIO/GxIO.h>
 
 #include <TinyGPS++.h>
 
 
 
-SPIClass        *dispPort  = nullptr;
-SPIClass        *rfPort    = nullptr;
-GxIO_Class      *io        = nullptr;
-GxEPD_Class     *display   = nullptr;
+// SPIClass        *dispPort  = nullptr;
+// SPIClass        *rfPort    = nullptr;
+// GxIO_Class      *io        = nullptr;
+// GxEPD_Class     *display   = nullptr;
 
 TinyGPSPlus     *gps;
 
@@ -41,7 +41,7 @@ bool setupGPS();
 void loopGPS();
 void configVDD(void);
 void boardInit();
-void LilyGo_logo();
+// void LilyGo_logo();
 void enableBacklight(bool en);
 
 void setup()
@@ -50,7 +50,7 @@ void setup()
     delay(200);
     boardInit();
     delay(200);
-    LilyGo_logo();
+    // LilyGo_logo();
 }
 
 
@@ -85,32 +85,32 @@ void loop()
 
 }
 
-void setupDisplay()
-{
-    dispPort = new SPIClass(
-        /*SPIPORT*/NRF_SPIM2,
-        /*MISO*/ ePaper_Miso,
-        /*SCLK*/ePaper_Sclk,
-        /*MOSI*/ePaper_Mosi);
+// void setupDisplay()
+// {
+//     dispPort = new SPIClass(
+//         /*SPIPORT*/NRF_SPIM2,
+//         /*MISO*/ ePaper_Miso,
+//         /*SCLK*/ePaper_Sclk,
+//         /*MOSI*/ePaper_Mosi);
 
-    io = new GxIO_Class(
-        *dispPort,
-        /*CS*/ ePaper_Cs,
-        /*DC*/ ePaper_Dc,
-        /*RST*/ePaper_Rst);
+//     io = new GxIO_Class(
+//         *dispPort,
+//         /*CS*/ ePaper_Cs,
+//         /*DC*/ ePaper_Dc,
+//         /*RST*/ePaper_Rst);
 
-    display = new GxEPD_Class(
-        *io,
-        /*RST*/ ePaper_Rst,
-        /*BUSY*/ ePaper_Busy);
+//     display = new GxEPD_Class(
+//         *io,
+//         /*RST*/ ePaper_Rst,
+//         /*BUSY*/ ePaper_Busy);
 
-    dispPort->begin();
-    display->init(/*115200*/);
-    display->setRotation(0);
-    display->fillScreen(GxEPD_WHITE);
-    display->setTextColor(GxEPD_BLACK);
-    display->setFont(&FreeMonoBold12pt7b);
-}
+//     dispPort->begin();
+//     display->init(/*115200*/);
+//     display->setRotation(0);
+//     display->fillScreen(GxEPD_WHITE);
+//     display->setTextColor(GxEPD_BLACK);
+//     display->setFont(&FreeMonoBold12pt7b);
+// }
 
 
 bool setupGPS()
@@ -273,7 +273,7 @@ void configVDD(void)
 }
 void boardInit()
 {
-    uint8_t rlst = 0;
+    // uint8_t rlst = 0;
 
 #ifdef HIGH_VOLTAGE
     configVDD();
@@ -291,7 +291,7 @@ void boardInit()
     digitalWrite(Power_Enable_Pin, HIGH);
 
     pinMode(ePaper_Backlight, OUTPUT);
-    enableBacklight(false);
+    // enableBacklight(false);
     //digitalWrite(ePaper_Backlight, HIGH);
 
     pinMode(GreenLed_Pin, OUTPUT);
@@ -313,25 +313,25 @@ void boardInit()
     digitalWrite(RedLed_Pin, HIGH);
     digitalWrite(BlueLed_Pin, HIGH);
 
-    setupDisplay();
+    // setupDisplay();
     setupGPS();
 
-    display->update();
+    // display->update();
     delay(500);
 
 
 }
 
-void enableBacklight(bool en)
-{
-    digitalWrite(ePaper_Backlight, en);
-}
+// void enableBacklight(bool en)
+// {
+//     digitalWrite(ePaper_Backlight, en);
+// }
 
 
-void LilyGo_logo(void)
-{
-    display->setRotation(2);
-    display->fillScreen(GxEPD_WHITE);
-    display->drawExampleBitmap(BitmapExample1, 0, 0, GxEPD_WIDTH, GxEPD_HEIGHT, GxEPD_BLACK);
-    display->update();
-}
+// void LilyGo_logo(void)
+// {
+//     display->setRotation(2);
+//     display->fillScreen(GxEPD_WHITE);
+//     display->drawExampleBitmap(BitmapExample1, 0, 0, GxEPD_WIDTH, GxEPD_HEIGHT, GxEPD_BLACK);
+//     display->update();
+// }
